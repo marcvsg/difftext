@@ -1,0 +1,599 @@
+/* 1. Importação da Fonte */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* 2. Variáveis e Configurações Globais */
+:root {
+    /* Cores Fixas */
+    --habbo-orange: #f92424;
+    --habbo-window-bg: #ffffd7;
+    --habbo-border-dark: #1f2937;
+    --habbo-header-start: #3b82f6;
+    --habbo-header-end: #1d4ed8;
+    --habbo-preview-bg: #3b82f6;
+    --habbo-button-blue: #2563eb;
+    --habbo-button-blue-hover: #1d4ed8;
+    --habbo-button-green: #10b981;
+    --habbo-button-green-hover: #059669;
+    --font-main: 'Press Start 2P', monospace;
+    --input-border: #d1d5db;
+}
+
+/* Reset e Estilos Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-main);
+}
+
+body {
+    font-family: var(--font-main);
+    background-image: url('/img/bg.gif');
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 1rem;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Container Principal */
+.app-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0rem;
+}
+
+/* Janela Principal */
+.main-window {
+    background-color:darkgrey;
+    border: 4px solid var(--habbo-border-dark);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 8px 8px 0 0 rgba(0, 0, 0, 0.2);
+
+    width: 100%;
+}
+
+/* Cabeçalho */
+.window-header {
+    background: linear-gradient(to right, var(--habbo-header-start), var(--habbo-header-end));
+    color: white;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.window-title {
+    font-size: 1.25rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Grid de Conteúdo */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+    .content-grid {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
+/* Painel de Visualização */
+.preview-panel {
+    width: 100%;
+    max-width: 300px;
+    background: white;
+    border: 2px solid var(--habbo-border-dark);
+    border-radius: 4px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Avatar */
+.avatar-wrapper {
+    position: relative;
+    background-color: var(--habbo-preview-bg);
+    border: 2px solid var(--habbo-border-dark);
+    margin-bottom: 1rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    image-rendering: pixelated;
+    width: 100%;
+    max-width: 300px;
+}
+
+.avatar-image {
+    display: block;
+    width: auto;
+    height: 100%;
+    image-rendering: pixelated;
+    object-fit: contain;
+}
+
+/* Efeito de carregamento */
+.avatar-wrapper.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+    from { opacity: 0.6; }
+    to { opacity: 0.2; }
+}
+
+/* Botões */
+.button-group {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.button {
+    padding: 0.5rem 1rem;
+    border: 2px solid;
+    border-radius: 4px;
+    font-family: var(--font-pixelated);
+    font-size: 0.875rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
+
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.button-blue {
+    background-color: var(--habbo-button-blue);
+    border-color: var(--habbo-button-blue-hover);
+    color: white;
+}
+
+.button-green {
+    background-color: var(--habbo-button-green);
+    border-color: var(--habbo-button-green-hover);
+    color: white;
+}
+
+/* Controles de Direção */
+.direction-control {
+    width: 100%;
+    max-width: 300px;
+    background: #f3f4f6;
+    border: 2px solid var(--habbo-border-dark);
+    border-radius: 4px;
+    padding: 1rem;
+}
+
+.direction-control p {
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+.direction-info span {
+    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.direction-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.direction-range {
+    width: 100%;
+    height: 8px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #d1d5db;
+    border-radius: 4px;
+    outline: none;
+}
+
+.direction-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--habbo-button-blue);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Painel de Controles */
+.controls-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Changed to space-between */
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--habbo-border-dark);
+}
+
+/* Language Switcher */
+.language-switcher {
+    position: relative;
+}
+
+.language-switcher-button {
+    background: var(--habbo-button-blue);
+    color: white;
+    border: 2px solid var(--habbo-border-dark);
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    box-shadow: 2px 2px 0 0 rgba(0,0,0,0.3);
+}
+
+.language-switcher-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background:#333333;
+    border: 2px solid var(--habbo-border-dark);
+    z-index: 10;
+    min-width: 120px;
+    box-shadow: 4px 4px 0 0 rgba(0,0,0,0.2);
+}
+
+.language-switcher-dropdown button {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-family: var(--font-main);
+    font-size: 0.75rem;
+}
+
+.language-switcher-dropdown button:hover {
+    background: var(--habbo-preview-bg);
+}
+
+/* Seção de Busca */
+.search-section {
+    background: white;
+    border: 2px solid var(--habbo-border-dark);
+    border-radius: 4px;
+    padding: 1.25rem;
+}
+
+.search-input-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.search-input {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    border: 2px solid var(--input-border);
+    border-radius: 4px;
+    font-family: var(--font-pixelated);
+    font-size: 0.875rem;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--habbo-button-blue);
+}
+
+.search-button {
+    padding: 0 1rem;
+    background-color: var(--habbo-button-blue);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Seletor */
+.selector-container {
+    margin-bottom: 1rem;
+}
+
+.selector-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.selector-select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid var(--input-border);
+    border-radius: 4px;
+    font-family: var(--font-pixelated);
+    font-size: 0.875rem;
+    background-color: white;
+}
+
+/* Painel de Depuração */
+.debug-panel {
+    width: 800px;
+    overflow: auto;
+    background: #1f2937;
+    color: #f3f4f6;
+    padding: 1rem;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.75rem;
+    overflow-x: auto;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .content-grid {
+        padding: 1rem;
+    }
+    
+    .preview-panel {
+        padding: 1rem;
+    }
+    
+    .button {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .window-title {
+        font-size: 1rem;
+    }
+}
+
+/* Estado de Carregamento */
+.loading {
+    opacity: 0.7;
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.5);
+    z-index: 1;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--habbo-button-blue);
+    animation: spin 1s ease-in-out infinite;
+    z-index: 2;
+}
+.search-input {
+    flex-grow: 1;
+    border: 2px solid var(--habbo-border-dark);
+    padding: 0.5rem 0.75rem;
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-family: var(--font-pixelated);
+    box-shadow: inset 2px 2px 0px 0px rgba(0, 0, 0, 0.3);
+    outline: none;
+}
+.search-button {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    border: 2px solid #1d4ed8;
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: white;
+    background-color: var(--habbo-button-blue);
+    box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.1s;
+    cursor: pointer;
+}
+.search-button:hover:not(:disabled) {
+     background-color: var(--habbo-button-blue-hover);
+}
+.search-button:disabled {
+    background-color: #93c5fd; 
+    cursor: not-allowed;
+}
+
+/* 12. Seção de Seletores (Dropdowns) */
+.selectors-section {
+    background-color: white;
+    padding: 1.25rem;
+    border: 2px solid var(--habbo-border-dark);
+    box-shadow: 3px 3px 0px 0px rgba(0,0,0,0.3);
+}
+.selectors-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+@media (min-width: 640px) {
+    .selectors-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* 13. Estilos do Componente Selector */
+.selector-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+.selector-label {
+    font-size: 0.875rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.25rem;
+}
+.selector-wrapper {
+    position: relative;
+    border: 2px solid var(--habbo-border-dark);
+    background-color: white;
+    box-shadow: inset 2px 2px 0px 0px rgba(0, 0, 0, 0.3);
+}
+.selector-select {
+    width: 100%;
+    appearance: none;
+    background-color: white;
+    padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+    color: #1f2937;
+    font-size: 0.875rem;
+    font-family: var(--font-pixelated);
+    outline: none;
+    transition: background-color 0.1s;
+    cursor: pointer;
+}
+.selector-chevron {
+    pointer-events: none;
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    height: 1.25rem;
+    width: 1.25rem;
+    transform: translateY(-50%);
+    color: #4b5563; 
+}
+.selector-select:disabled {
+    cursor: not-allowed;
+    background-color: #f3f4f6;
+}
+
+
+/* 14. Seletor de Itens Carregados */
+.carrying-item-section {
+    background-color: #f3f4f6; 
+    padding: 1rem;
+    margin-top: 1rem;
+    border: 2px solid #ff0000; 
+    box-shadow: 3px 3px 0px 0px rgba(255, 0, 0, 0.5);
+}
+
+/* 15. Debug URL */
+.debug-panel {
+    background-color: #1f2937; 
+    color: #a7f3d0; 
+    padding: 1.25rem;
+    border: 2px solid #059669; 
+    box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.7);
+}
+.debug-code {
+    font-family: var(--font-main), monospace;
+    font-size: 0.75rem;
+    display: block;
+    background-color: #374151; 
+    padding: 0.75rem;
+    overflow: auto;
+    white-space: pre-wrap;
+}
+
+/* 16. Modal Styles */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    padding: 1rem;
+    font-family: var(--font-pixelated);
+}
+.modal-content {
+    background: linear-gradient(to bottom right, #e5e7eb, #9ca3af); 
+    padding: 1.5rem;
+    max-width: 24rem;
+    width: 100%;
+    border: 4px solid #4b5563;
+}
+.modal-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #1f2937;
+    border-bottom: 2px solid #4b5563;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+.modal-text {
+    color: #374151;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+}
+.modal-button {
+    width: 100%;
+    background-color: #2563eb;
+    color: white;
+    padding: 0.5rem;
+    border: 2px solid #1d4ed8;
+    transition: background-color 0.1s;
+    font-size: 0.875rem;
+    box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+.modal-button:hover {
+    background-color: #1d4ed8;
+}
