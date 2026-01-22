@@ -4,7 +4,9 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+// Square Cloud define PORT automaticamente, mas usamos 80 como fallback
+const PORT = process.env.PORT || 80;
+const HOST = '0.0.0.0'; // Sempre escuta em todas as interfaces
 
 // Middleware
 app.use(cors());
@@ -51,11 +53,22 @@ app.post('/api/improve-text', async (req, res) => {
   }
 });
 
+// Rota raiz
+app.get('/', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    message: 'DiffText Backend API',
+    timestamp: new Date().toISOString() 
+  });
+});
+
 // Rota de health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+// Escuta em 0.0.0.0 para permitir acesso externo (necessário para Square Cloud)
+app.listen(PORT, HOST, () => {
+  console.log(`Servidor rodando em http://${HOST}:${PORT}`);
+  console.log(`Porta definida: ${PORT} (via ${process.env.PORT ? 'PORT env' : 'padrão'})`);
 });
