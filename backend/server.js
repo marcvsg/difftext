@@ -9,7 +9,16 @@ const PORT = process.env.PORT || 80;
 const HOST = '0.0.0.0'; // Sempre escuta em todas as interfaces
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'https://difftxt.vercel.app',
+    'http://localhost:5173',
+    'http://localhost:3000'
+  ],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  credentials: true,
+  allowedHeaders: ['Content-Type']
+}));
 app.use(express.json({ limit: '50mb' })); // Aumenta o limite para permitir textos grandes
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
