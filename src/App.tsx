@@ -10,7 +10,7 @@ import {
 import './App.css';
 
 // URL do backend - pode ser configurada via variável de ambiente
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://difftexto.squareweb.app/';
 
 // Interface para os resultados da comparação
 interface DiffPart {
