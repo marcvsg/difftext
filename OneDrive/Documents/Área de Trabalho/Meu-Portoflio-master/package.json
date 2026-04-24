@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "dev": "cd card-react && npm run dev",
+    "build": "cd card-react && npm run build",
+    "preview": "cd card-react && npm run preview",
+    "lint": "cd card-react && npm run lint"
+  },
+  "dependencies": {
+    "@hugeicons/core-free-icons": "^1.2.1",
+    "@hugeicons/react": "^1.1.1",
+    "@phosphor-icons/react": "^2.1.10"
+  }
+}
